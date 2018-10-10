@@ -1,0 +1,17 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+  box-shadow: 3px 0 6px rgba(0,0,0,.24);
+}
+
+.top-nav {
+  padding-top: 0;
+
+  .mat-list-item {
+    float: left;
+    user-select: none;
+  }
+}
