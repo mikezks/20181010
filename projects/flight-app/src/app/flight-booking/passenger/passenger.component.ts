@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./passenger.component.scss']
 })
 export class PassengerComponent implements OnInit {
+  activePane: number = 2;
 
   constructor() { }
 

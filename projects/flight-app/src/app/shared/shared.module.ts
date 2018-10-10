@@ -13,6 +13,8 @@ import {
   MatSnackBarModule
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
+import { TabComponent } from './components/tab/tab.component';
+import { TabbedPaneComponent } from './components/tabbed-pane/tabbed-pane.component';
 
 @NgModule({
   imports: [
@@ -29,7 +31,10 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatListModule,
     MatSnackBarModule
   ],
-  declarations: [],
+  declarations: [
+    TabComponent,
+    TabbedPaneComponent
+  ],
   exports: [
     BrowserAnimationsModule,
     FormsModule,
@@ -41,7 +46,9 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    TabComponent,
+    TabbedPaneComponent
   ]
 })
 export class SharedModule { }
