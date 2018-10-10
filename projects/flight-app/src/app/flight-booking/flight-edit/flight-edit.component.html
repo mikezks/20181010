@@ -11,3 +11,42 @@
     </div>
   </mat-card-content>
 </mat-card>
+
+<mat-card>
+  <form [formGroup]="editForm">
+    <mat-form-field>
+      <input
+        formControlName="id"
+        matInput
+        placeholder="ID">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        formControlName="date"
+        matInput
+        placeholder="Date">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        formControlName="from"
+        matInput
+        placeholder="From">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        formControlName="to"
+        matInput
+        placeholder="To">
+    </mat-form-field>
+
+    <button mat-raised-button (click)="save()">Save</button>
+  </form>
+
+  <div *ngIf="editForm.controls.from.pending">
+    <marquee direction="down">Validiere</marquee>
+  </div>
+  <div *ngIf="editForm.controls.from.hasError('asyncCity')">[ asyncCity Fehler ]</div>
+</mat-card>

@@ -7,12 +7,14 @@ import { FlightCardComponent } from './flight-card/flight-card.component';
 import { PassengerComponent } from './passenger/passenger.component';
 import { FlightEditComponent } from './flight-edit/flight-edit.component';
 import { NgModule } from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     imports: [
       CommonModule,
       SharedModule,
       RouterModule.forChild(FLIGHT_BOOKING_ROUTES),
+      ReactiveFormsModule
     ],
     declarations: [
       FlightSearchComponent,
@@ -23,4 +25,3 @@ import { NgModule } from '@angular/core';
     providers: []
   })
   export class FlightBookingModule { }
-  
