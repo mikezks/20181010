@@ -3,6 +3,7 @@ import { Flight } from '../../entities/flight';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
 import { FlightService } from './flight.service';
+import {EventService} from '../../event.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -22,8 +23,6 @@ export class FlightSearchComponent implements OnInit {
 
 
   basket: object = {
-    "3": true,
-    "5": true
   };
 
   // private http: HttpClient;
@@ -31,7 +30,8 @@ export class FlightSearchComponent implements OnInit {
   constructor(
     private flightService: FlightService,
     private snackBar: MatSnackBar,
-    private http: HttpClient) { 
+    private http: HttpClient,
+    private eventService: EventService) {
     // this.http = http;
   }
 
@@ -71,4 +71,14 @@ export class FlightSearchComponent implements OnInit {
   select(f: Flight) {
   }
 
+  selectedChange(f: Flight, selected: boolean): void {
+    this.basket[f.id] = selected;
+
+    const flightCount = Object.keys(this.basket)
+      .map((key, index) => this.basket[key])
+      .filter(value => value)
+      .length;
+
+    this.eventService.setSelectedFlightCount(flightCount);
+  }
 }

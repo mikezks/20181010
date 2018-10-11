@@ -28,7 +28,8 @@
 
   <app-flight-card 
     [item]="f" 
-    [(selected)]="basket[f.id]"
+    [selected]="basket[f.id]"
+    (selectedChange)="selectedChange(f, $event)"
     ></app-flight-card>
 
 <!--

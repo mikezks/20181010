@@ -8,6 +8,7 @@ import { PassengerComponent } from './passenger/passenger.component';
 import { FlightEditComponent } from './flight-edit/flight-edit.component';
 import { NgModule } from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
+import { FlightTypeaheadComponent } from './flight-typeahead/flight-typeahead.component';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import {ReactiveFormsModule} from '@angular/forms';
       FlightSearchComponent,
       FlightCardComponent,
       PassengerComponent,
-      FlightEditComponent
+      FlightEditComponent,
+      FlightTypeaheadComponent
     ],
     providers: []
   })

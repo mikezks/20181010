@@ -10,7 +10,7 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatListModule,
-  MatSnackBarModule
+  MatSnackBarModule, MatTableModule, MatBadgeModule
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { TabComponent } from './components/tab/tab.component';
@@ -29,7 +29,9 @@ import { TabbedPaneComponent } from './components/tabbed-pane/tabbed-pane.compon
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule,
+    MatBadgeModule
   ],
   declarations: [
     TabComponent,
@@ -47,6 +49,8 @@ import { TabbedPaneComponent } from './components/tabbed-pane/tabbed-pane.compon
     MatIconModule,
     MatListModule,
     MatSnackBarModule,
+    MatTableModule,
+    MatBadgeModule,
     TabComponent,
     TabbedPaneComponent
   ]

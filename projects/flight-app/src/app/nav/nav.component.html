@@ -10,6 +10,7 @@
     <mat-nav-list>
       <a mat-list-item routerLink="home">Home</a>
       <a mat-list-item routerLink="flight-search">Flight Search</a>
+      <a mat-list-item routerLink="flight-typeahead">Flight Typeahead</a>
       <a mat-list-item routerLink="passenger-search">Passenger Search</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -27,7 +28,7 @@
       <mat-nav-list class="top-nav">
         <a mat-list-item>
           <mat-icon
-            matBadge=""
+            [matBadge]="flightCount$ | async"
             matBadgeColor="accent">
             flight
           </mat-icon>
