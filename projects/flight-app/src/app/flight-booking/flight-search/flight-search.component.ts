@@ -4,6 +4,10 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
 import { FlightService } from './flight.service';
 import {EventService} from '../../event.service';
+import {Observable} from 'rxjs';
+import * as fromFlightBooking from '../+state';
+import {select, Store} from '@ngrx/store';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-flight-search',
@@ -17,9 +21,11 @@ export class FlightSearchComponent implements OnInit {
   
   // flights: Array<Flight> = [];
   // {{ flights }}
-  get flights() {
+  /*get flights() {
     return this.flightService.flights;
-  }
+  }*/
+
+  flights$: Observable<Flight[]>;
 
 
   basket: object = {
@@ -31,41 +37,33 @@ export class FlightSearchComponent implements OnInit {
     private flightService: FlightService,
     private snackBar: MatSnackBar,
     private http: HttpClient,
-    private eventService: EventService) {
+    private eventService: EventService,
+    private store: Store<fromFlightBooking.State>) {
     // this.http = http;
   }
 
   ngOnInit() {
+    this.flights$ =
+      this.store
+        .pipe(
+          select(fromFlightBooking.getFlights)
+        );
   }
 
   search(): void {
 
-    this.flightService.load(this.from, this.to);
+    //this.flightService.load(this.from, this.to);
 
-    
-
-    // if (!this.from || !this.to) throw new Error('from and/or to need a value!');
-
-    // this.flights = [
-    //   {
-    //     id: 4711,
-    //     from: 'Graz',
-    //     to: 'Flagranti',
-    //     date: '2018-06-25T17:00:00'
-    //   },
-    //   {
-    //     id: 4712,
-    //     from: 'Graz',
-    //     to: 'Kognito',
-    //     date: '2018-06-25T17:30:00'
-    //   },
-    //   {
-    //     id: 4713,
-    //     from: 'Graz',
-    //     to: 'Mallorca',
-    //     date: '2018-06-25T18:00:00'
-    //   }
-    // ];
+    this.flightService
+      .find(this.from, this.to)
+      .subscribe(
+        flights => {
+          this.store.dispatch(new fromFlightBooking.FlightsLoadedAction(flights));
+        },
+        error => {
+          console.error('error', error);
+        }
+      );
   }
 
   select(f: Flight) {
@@ -80,5 +78,22 @@ export class FlightSearchComponent implements OnInit {
       .length;
 
     this.eventService.setSelectedFlightCount(flightCount);
+  }
+
+  delay(): void {
+    this.flights$
+      .pipe(
+        take(1)
+      )
+      .subscribe(flights => {
+          const flight = flights[0];
+
+          const oldDate = new Date(flight.date);
+          const newDate = new Date(oldDate.getTime() + 15 * 60 * 1000);
+          const newFlight = { ...flight, date: newDate.toISOString() };
+
+          this.store.dispatch(new fromFlightBooking.FlightUpdateAction(newFlight));
+        }
+      );
   }
 }

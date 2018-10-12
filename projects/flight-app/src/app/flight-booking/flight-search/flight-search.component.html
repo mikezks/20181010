@@ -15,8 +15,21 @@
   </mat-card-content>
   <mat-card-actions>
       
-    <button (click)="search()" mat-raised-button	color="primary">Search</button>
-      
+    <button
+      (click)="search()"
+      mat-raised-button
+      color="primary">
+      Search
+    </button>
+    <ng-container *ngIf="flights$ | async as flights">
+      <button
+        *ngIf="flights.length > 0"
+        mat-raised-button
+        color="primary"
+        (click)="delay()">
+        Delay 1st Flight
+      </button>
+    </ng-container>
   </mat-card-actions>
 
 </mat-card>
@@ -24,20 +37,16 @@
 
 <div class="row" style="padding-left:15px; padding-right:15px">
 
-<div *ngFor="let f of flights" style="padding:0px" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col">
+  <ng-container *ngIf="flights$ | async as flights">
+    <div *ngFor="let f of flights" style="padding:0px" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col">
 
-  <app-flight-card 
-    [item]="f" 
-    [selected]="basket[f.id]"
-    (selectedChange)="selectedChange(f, $event)"
-    ></app-flight-card>
-
-<!--
-  [selected]="basket[f.id]"
-  (selectedChange)="basket[f.id] = $event"
--->
-
-</div>
+      <app-flight-card
+        [item]="f"
+        [selected]="basket[f.id]"
+        (selectedChange)="selectedChange(f, $event)"
+        ></app-flight-card>
+    </div>
+  </ng-container>
 
 </div>
 
