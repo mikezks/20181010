@@ -3,7 +3,8 @@ import { Flight } from '../../../entities/flight';
 
 export enum FlightBookingActionTypes {
   FlightsLoadedAction = '[FlightBooking] Flights loaded',
-  FlightUpdateAction = '[FlightBooking] Update Flight'
+  FlightUpdateAction = '[FlightBooking] Update Flight',
+  FlightsLoadAction = '[FlightBooking] Load Flights'
 }
 
 export class FlightsLoadedAction implements Action {
@@ -17,6 +18,15 @@ export class FlightUpdateAction {
   }
 }
 
+export class FlightsLoadAction {
+  readonly type = FlightBookingActionTypes.FlightsLoadAction;
+  constructor(
+    readonly from: string,
+    readonly to: string) {
+  }
+}
+
 export type FlightBookingActions =
   FlightsLoadedAction |
-  FlightUpdateAction;
+  FlightUpdateAction |
+  FlightsLoadAction;

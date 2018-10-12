@@ -54,7 +54,7 @@ export class FlightSearchComponent implements OnInit {
 
     //this.flightService.load(this.from, this.to);
 
-    this.flightService
+    /*this.flightService
       .find(this.from, this.to)
       .subscribe(
         flights => {
@@ -63,7 +63,13 @@ export class FlightSearchComponent implements OnInit {
         error => {
           console.error('error', error);
         }
-      );
+      );*/
+
+    this.store.dispatch(
+      new fromFlightBooking.FlightsLoadAction(
+        this.from, this.to
+      )
+    );
   }
 
   select(f: Flight) {
